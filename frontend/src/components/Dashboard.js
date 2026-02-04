@@ -303,10 +303,12 @@ const Dashboard = () => {
       }
     }
 
-    // Check hourly reminder (every hour at :00)
-    if (minute === 0 && lastReminderHour.current !== hour) {
-      lastReminderHour.current = hour;
-      playReminder();
+    // Check reminder (dynamic based on start time)
+    if (nextReminderTime.current) {
+      const reminderDate = new Date(nextReminderTime.current);
+      if (hour === reminderDate.getHours() && minute === reminderDate.getMinutes()) {
+        playReminder();
+      }
     }
   };
 
