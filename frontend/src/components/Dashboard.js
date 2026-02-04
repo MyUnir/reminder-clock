@@ -448,20 +448,23 @@ const Dashboard = () => {
                   return (
                     <div
                       key={index}
-                      className={`p-4 rounded-lg border smooth-transition ${
+                      className={`p-3 rounded-lg border smooth-transition ${
                         isNext ? 'border-amber-500 bg-amber-50 shadow-md' : isPast ? 'border-slate-200 bg-slate-50 opacity-60' : 'border-slate-200 bg-white'
                       }`}
                       data-testid={`schedule-item-${index}`}
                     >
                       <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-semibold text-primary">{item.type}</div>
-                          <div className="text-sm text-muted-foreground">{item.description}</div>
+                        <div className="flex items-center gap-2">
+                          {item.type === 'Reminder Jam' && <Bell className="h-4 w-4 text-blue-500" />}
+                          <div>
+                            <div className="font-semibold text-primary text-sm">{item.type}</div>
+                            <div className="text-xs text-muted-foreground">{item.description}</div>
+                          </div>
                         </div>
                         <div className="flex items-center gap-3">
-                          {isPast && <CheckCircle2 className="h-5 w-5 text-green-500" />}
-                          {isNext && <AlertCircle className="h-5 w-5 text-amber-500" />}
-                          <div className="text-2xl font-bold mono text-primary">{item.time}</div>
+                          {isPast && <CheckCircle2 className="h-4 w-4 text-green-500" />}
+                          {isNext && <AlertCircle className="h-4 w-4 text-amber-500" />}
+                          <div className="text-xl font-bold mono text-primary">{item.time}</div>
                         </div>
                       </div>
                     </div>
