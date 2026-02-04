@@ -1,0 +1,155 @@
+{
+  "identity": {
+    "name": "Sinarmas Reminder System",
+    "persona": "E1 - The Anti-AI Designer",
+    "tone": "Professional, Reliable, Corporate, Precise",
+    "theme_preference": "Light Mode (Corporate Standard) with Dark Mode Toggle"
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Manrope, sans-serif",
+      "body": "Inter, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl md:text-5xl font-bold tracking-tight",
+      "h2": "text-3xl font-semibold tracking-tight",
+      "h3": "text-2xl font-medium",
+      "body": "text-base leading-relaxed",
+      "caption": "text-sm text-muted-foreground"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "DEFAULT": "#0F172A",
+        "foreground": "#F8FAFC",
+        "description": "Deep Slate/Ebony (Sinarmas Land inspired)"
+      },
+      "secondary": {
+        "DEFAULT": "#F1F5F9",
+        "foreground": "#0F172A",
+        "description": "Light Slate for backgrounds"
+      },
+      "accent": {
+        "DEFAULT": "#B45309",
+        "foreground": "#FFFFFF",
+        "light": "#FCD34D",
+        "description": "Corporate Gold/Amber"
+      },
+      "destructive": {
+        "DEFAULT": "#DC2626",
+        "foreground": "#FFFFFF",
+        "description": "Sinarmas Red for Alerts/Stop"
+      },
+      "success": {
+        "DEFAULT": "#15803D",
+        "foreground": "#FFFFFF",
+        "description": "Green for Active/Running state"
+      },
+      "background": "#FFFFFF",
+      "surface": "#F8FAFC"
+    },
+    "gradients": {
+      "gold_shine": "bg-gradient-to-r from-amber-500 to-yellow-400",
+      "corporate_blue": "bg-gradient-to-br from-slate-900 to-slate-800"
+    }
+  },
+  "layout": {
+    "grid_system": "Bento Grid Mode B (High Density)",
+    "spacing": "Generous (p-6 to p-12 for containers)",
+    "container": "max-w-7xl mx-auto",
+    "structure": [
+      {
+        "area": "header",
+        "description": "Top bar with Logo, Digital Clock, and Theme Toggle"
+      },
+      {
+        "area": "hero",
+        "description": "Main status card showing Next Alarm, Countdown, and System Status (Running/Stopped). Uses subtle office blur background."
+      },
+      {
+        "area": "controls",
+        "description": "Quick actions: Start/Stop System, Test Audio, Volume Control"
+      },
+      {
+        "area": "timeline",
+        "description": "Vertical list of today's schedule. Active item highlighted with Gold border and shadow."
+      }
+    ]
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-md px-8 py-6 text-lg font-medium",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md px-6 py-4",
+      "destructive": "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md rounded-md px-8 py-6 text-lg font-medium",
+      "outline": "border-2 border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-6 py-4"
+    },
+    "cards": {
+      "base": "bg-card text-card-foreground rounded-xl border shadow-sm",
+      "glass": "bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg",
+      "active": "border-2 border-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.2)] bg-amber-50/50"
+    },
+    "status_indicators": {
+      "running": "animate-pulse bg-green-500 h-3 w-3 rounded-full inline-block mr-2",
+      "stopped": "bg-red-500 h-3 w-3 rounded-full inline-block mr-2",
+      "waiting": "bg-amber-500 h-3 w-3 rounded-full inline-block mr-2"
+    }
+  },
+  "visual_enhancers": {
+    "shadows": "shadow-lg for cards, shadow-xl for floating elements",
+    "borders": "1px solid border-slate-200",
+    "radius": "rounded-xl",
+    "animations": {
+      "hover": "transform hover:-translate-y-1 transition-transform duration-300",
+      "fade_in": "animate-in fade-in duration-500",
+      "slide_up": "animate-in slide-in-from-bottom-4 duration-500"
+    }
+  },
+  "assets": {
+    "images": [
+      {
+        "category": "background",
+        "url": "https://images.unsplash.com/photo-1765366417030-16d9765d920a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBjb3Jwb3JhdGUlMjBvZmZpY2UlMjBpbnRlcmlvciUyMGJsdXJ8ZW58MHx8fHwxNzcwMTg4ODI0fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Subtle modern office background for the Hero card to add depth."
+      }
+    ],
+    "icons": "Lucide React (Clock, Play, Pause, Volume2, Bell, Calendar, AlertCircle, CheckCircle2)"
+  },
+  "functionality_rules": {
+    "audio_handling": "Use native Audio API or a reliable React hook. Must support auto-play (user interaction required first time).",
+    "schedule_logic": "Check time every second. Match HH:mm:ss exactly for triggers. Handle day of week logic (Mon-Thu vs Fri).",
+    "notifications": "Request Notification permission on Start. Send notification 1 minute before event.",
+    "state_management": "Persist 'isRunning' state in localStorage so refresh doesn't kill the scheduler (optional, but good for reliability)."
+  },
+  "instructions_to_main_agent": [
+    "1. Setup the 'ScheduleContext' to manage the global timer and audio state.",
+    "2. Create a 'ScheduleConfig' object/file that defines the rules (07:50 Blok Nasional, etc).",
+    "3. Build the 'Dashboard' layout using the Bento Grid strategy.",
+    "4. Implement the 'AudioPlayer' component that is invisible but handles the logic.",
+    "5. Use the provided image URL as a background for the main status card with an overlay.",
+    "6. Ensure the 'Start' button is prominent. The system cannot auto-play audio without user interaction first.",
+    "7. Add a 'Test Audio' button to verify sound is working.",
+    "8. Use 'sonner' for toast notifications when an event triggers."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+    "Prioritize using pre-existing components from src/components/ui when applicable",
+    "Create new components that match the style and conventions of existing components when needed",
+    "Examine existing components to understand the project's component patterns before creating new ones",
+    "Components MUST use named exports (export const ComponentName = ...)",
+    "Pages MUST use default exports (export default function PageName() {...})",
+    "Use sonner for toasts. Sonner component are located in /app/src/components/ui/sonner.tsx"
+  ]
+}
