@@ -1,0 +1,114 @@
+{
+  "timestamp": "2026-02-04T07:14:05.411111",
+  "total_tests": 7,
+  "passed_tests": 7,
+  "success_rate": 100.0,
+  "results": [
+    {
+      "test_name": "Root API Endpoint",
+      "method": "GET",
+      "endpoint": "api/",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "message": "Sinarmas Reminder System API"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Create Activity Log",
+      "method": "POST",
+      "endpoint": "api/activity-log",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "id": "a8ea4a40-d155-4565-baff-37a4996d5925",
+        "event_type": "test_event",
+        "event_time": "07:14:04",
+        "description": "Test activity log creation",
+        "timestamp": "2026-02-04T07:14:04.339929Z"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Get Activity Logs",
+      "method": "GET",
+      "endpoint": "api/activity-log",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": [
+        {
+          "id": "a8ea4a40-d155-4565-baff-37a4996d5925",
+          "event_type": "test_event",
+          "event_time": "07:14:04",
+          "description": "Test activity log creation",
+          "timestamp": "2026-02-04T07:14:04.339929Z"
+        }
+      ],
+      "error": null
+    },
+    {
+      "test_name": "Log Blok Nasional Event",
+      "method": "POST",
+      "endpoint": "api/activity-log",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "id": "4ab63ad6-4fab-42a8-a830-1661a9f40f7a",
+        "event_type": "blok_nasional",
+        "event_time": "07:50:00",
+        "description": "Blok Nasional dimainkan",
+        "timestamp": "2026-02-04T07:14:04.844037Z"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Log Sirine Kerja Event",
+      "method": "POST",
+      "endpoint": "api/activity-log",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "id": "3c9ea1b9-a755-42e0-8f9d-56b5f89145d8",
+        "event_type": "sirine_kerja",
+        "event_time": "08:00:00",
+        "description": "Sirine kerja dimainkan",
+        "timestamp": "2026-02-04T07:14:04.930862Z"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Log Reminder Event",
+      "method": "POST",
+      "endpoint": "api/activity-log",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "id": "81a7e1cb-cca5-4925-aeeb-38c7f46199f5",
+        "event_type": "reminder",
+        "event_time": "09:00:00",
+        "description": "Reminder jam dimainkan",
+        "timestamp": "2026-02-04T07:14:05.321653Z"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Invalid Endpoint",
+      "method": "GET",
+      "endpoint": "api/invalid-endpoint",
+      "expected_status": 404,
+      "actual_status": 404,
+      "success": true,
+      "response_data": {
+        "detail": "Not Found"
+      },
+      "error": null
+    }
+  ]
+}
