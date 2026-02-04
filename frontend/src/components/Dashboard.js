@@ -327,12 +327,25 @@ const Dashboard = () => {
       setIsRunning(false);
       setIsPlaying(false);
       setCurrentPlayingEvent(null);
+      nextReminderTime.current = null;
+      startTime.current = null;
       toast.info('Sistem dihentikan');
     } else {
       // Start
+      const now = new Date();
+      startTime.current = now.getTime();
+      
+      // Set first reminder to 1 hour from now
+      const firstReminder = new Date(now);
+      firstReminder.setHours(now.getHours() + 1);
+      firstReminder.setSeconds(0);
+      firstReminder.setMilliseconds(0);
+      nextReminderTime.current = firstReminder.getTime();
+      
       setIsRunning(true);
       intervalRef.current = setInterval(checkSchedule, 1000);
-      toast.success('Sistem dimulai');
+      
+      toast.success(`Sistem dimulai. Reminder pertama: ${firstReminder.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}`);
     }
   };
 
