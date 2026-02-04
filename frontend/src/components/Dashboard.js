@@ -585,8 +585,8 @@ const Dashboard = () => {
             </div>
             <div>
               <div className="text-amber-400 font-semibold mb-2">Reminder Jam</div>
-              <div className="text-sm">Setiap jam (00 menit)</div>
-              <div className="text-xs text-slate-300 mt-1">Pengingat waktu</div>
+              <div className="text-sm">1 jam setelah Start, lalu setiap 1 jam</div>
+              <div className="text-xs text-slate-300 mt-1">Dilewati jika bertabrakan dengan Blok/Sirine</div>
             </div>
           </div>
         </Card>
