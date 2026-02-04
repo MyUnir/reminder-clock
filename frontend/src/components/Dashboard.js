@@ -303,7 +303,7 @@ const Dashboard = () => {
     setNextEvent(next);
   }, [currentTime]);
 
-  // Get today's schedule
+  // Get today's schedule (without dynamic reminders)
   const getTodaySchedule = () => {
     const day = currentTime.getDay();
     let schedule = [];
@@ -331,13 +331,15 @@ const Dashboard = () => {
       });
     }
 
-    // Reminder Jam (setiap jam dari 07:00 - 18:00)
-    for (let hour = 7; hour <= 18; hour++) {
+    // Add dynamic reminder if system is running
+    if (isRunning && nextReminderTime.current) {
+      const reminderDate = new Date(nextReminderTime.current);
       schedule.push({
         type: 'Reminder Jam',
-        time: `${String(hour).padStart(2, '0')}:00`,
-        description: 'Pengingat waktu',
-        sortTime: hour * 100
+        time: `${String(reminderDate.getHours()).padStart(2, '0')}:${String(reminderDate.getMinutes()).padStart(2, '0')}`,
+        description: 'Pengingat waktu (1 jam dari Start)',
+        sortTime: reminderDate.getHours() * 100 + reminderDate.getMinutes(),
+        isDynamic: true
       });
     }
 
