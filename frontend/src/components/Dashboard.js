@@ -475,14 +475,6 @@ const Dashboard = () => {
                 <div className="text-center text-muted-foreground py-8">Tidak ada jadwal untuk hari ini</div>
               )}
             </div>
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <div className="flex items-start gap-2">
-                <Bell className="h-5 w-5 text-blue-600 mt-0.5" />
-                <div className="text-sm text-blue-900">
-                  <strong>Reminder Jam:</strong> Berbunyi setiap jam (00 menit)
-                </div>
-              </div>
-            </div>
           </Card>
 
           {/* Activity Log */}
