@@ -518,7 +518,10 @@ const Dashboard = () => {
                         <div className="flex items-center gap-2">
                           {item.type === 'Reminder Jam' && <Bell className="h-4 w-4 text-blue-500" />}
                           <div>
-                            <div className="font-semibold text-primary text-sm">{item.type}</div>
+                            <div className="font-semibold text-primary text-sm flex items-center gap-2">
+                              {item.type}
+                              {item.isDynamic && <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Dinamis</span>}
+                            </div>
                             <div className="text-xs text-muted-foreground">{item.description}</div>
                           </div>
                         </div>
