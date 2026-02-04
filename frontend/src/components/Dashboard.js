@@ -46,8 +46,9 @@ const Dashboard = () => {
   
   const audioRef = useRef(null);
   const intervalRef = useRef(null);
-  const lastReminderHour = useRef(-1);
+  const nextReminderTime = useRef(null);
   const lastPlayedEvent = useRef(null);
+  const startTime = useRef(null);
 
   // Request notification permission
   useEffect(() => {
