@@ -312,7 +312,8 @@ const Dashboard = () => {
       schedule.push({
         type: 'Blok Nasional',
         time: '07:50',
-        description: 'Indonesia Raya & Hymne Sinarmas'
+        description: 'Indonesia Raya & Hymne Sinarmas',
+        sortTime: 750
       });
     }
 
@@ -323,10 +324,24 @@ const Dashboard = () => {
         schedule.push({
           type: 'Sirine Kerja',
           time: `${String(t.hour).padStart(2, '0')}:${String(t.minute).padStart(2, '0')}`,
-          description: 'Waktu kerja'
+          description: 'Waktu kerja',
+          sortTime: t.hour * 100 + t.minute
         });
       });
     }
+
+    // Reminder Jam (setiap jam dari 07:00 - 18:00)
+    for (let hour = 7; hour <= 18; hour++) {
+      schedule.push({
+        type: 'Reminder Jam',
+        time: `${String(hour).padStart(2, '0')}:00`,
+        description: 'Pengingat waktu',
+        sortTime: hour * 100
+      });
+    }
+
+    // Sort by time
+    schedule.sort((a, b) => a.sortTime - b.sortTime);
 
     return schedule;
   };
