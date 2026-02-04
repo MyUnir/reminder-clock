@@ -435,8 +435,9 @@ const Dashboard = () => {
             <div className="flex items-center gap-3 mb-6">
               <Calendar className="h-6 w-6 text-amber-600" />
               <h3 className="text-2xl font-semibold text-primary">Jadwal Hari Ini</h3>
+              <span className="text-sm text-muted-foreground">({todaySchedule.length} event)</span>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-2 max-h-[500px] overflow-y-auto">
               {todaySchedule.length > 0 ? (
                 todaySchedule.map((item, index) => {
                   const now = currentTime.getHours() * 60 + currentTime.getMinutes();
