@@ -198,13 +198,50 @@ const Dashboard = () => {
     addLog('Sirine Kerja', 'Waktu kerja');
   };
 
+  // Check if there's a conflict with Blok Nasional or Sirine in next 2 minutes
+  const hasUpcomingConflict = (currentTime) => {
+    const day = currentTime.getDay();
+    const currentMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();
+    
+    // Check Blok Nasional (07:50)
+    if (day >= 1 && day <= 5) {
+      const blokTime = 7 * 60 + 50;
+      if (Math.abs(currentMinutes - blokTime) <= 2) {
+        return true;
+      }
+    }
+
+    // Check Sirine Kerja
+    if (day >= 1 && day <= 5) {
+      const schedule = day === 5 ? SCHEDULE_CONFIG.sirineKerja.jumat : SCHEDULE_CONFIG.sirineKerja.senin_kamis;
+      for (const s of schedule) {
+        const sirineTime = s.hour * 60 + s.minute;
+        if (Math.abs(currentMinutes - sirineTime) <= 2) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  };
+
   // Play hourly reminder
   const playReminder = async () => {
+    // Check for conflicts
+    if (hasUpcomingConflict(currentTime)) {
+      toast.info('Reminder dilewati karena ada Blok Nasional/Sirine');
+      // Skip this reminder and schedule next one
+      const nextTime = new Date(nextReminderTime.current);
+      nextTime.setHours(nextTime.getHours() + 1);
+      nextReminderTime.current = nextTime.getTime();
+      return;
+    }
+
     await playAudio(AUDIO_FILES.chime, 'Reminder Jam');
 
     if (Notification.permission === 'granted') {
       new Notification('Reminder', {
-        body: `Pukul ${currentTime.getHours()}:00`,
+        body: `Pukul ${currentTime.getHours()}:${String(currentTime.getMinutes()).padStart(2, '0')}`,
         icon: '/logo192.png'
       });
     }
@@ -219,7 +256,12 @@ const Dashboard = () => {
       console.error('Failed to log activity:', error);
     }
 
-    addLog('Reminder Jam', `Pukul ${currentTime.getHours()}:00`);
+    addLog('Reminder Jam', `Pukul ${currentTime.getHours()}:${String(currentTime.getMinutes()).padStart(2, '0')}`);
+
+    // Schedule next reminder (1 hour later)
+    const nextTime = new Date(nextReminderTime.current);
+    nextTime.setHours(nextTime.getHours() + 1);
+    nextReminderTime.current = nextTime.getTime();
   };
 
   // Add log to UI
